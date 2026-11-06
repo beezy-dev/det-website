@@ -1,0 +1,12 @@
+{
+  "name": "disco-et-emergo-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Disco Et Emergo landing page for GitHub Pages",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/site.test.js",
+    "build": "node --check js/main.js && node --test tests/site.test.js"
+  }
+}
+

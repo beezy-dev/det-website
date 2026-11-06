@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disco Et Emergo | Host Productive Meetings (That Don't Suck)!</title>
+    <meta name="description" content="Disco Et Emergo — Adult learning and interactive coaching sessions that transform workplace meetings into curated, collaborative experiences.">
+    <link rel="icon" type="image/png" href="images/logo-mark.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        marker: ['Kalam', 'cursive'],
+                        hand: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#FEFDF8',      // Warm cream whiteboard background
+                            text: '#2D3748',    // Soft dark slate for readability
+                            marine: '#135E67',  // Deep ocean teal from logo tail
+                            teal: '#1E8A8A',    // Vibrant mid-teal from logo & PDF slides
+                            seafoam: '#6BBBAE', // Soft seafoam from logo wingtip
+                            mint: '#A8E6CF',    // Whiteboard pastel mint highlight
+                            peach: '#FFD3B6',   // Whiteboard pastel peach
+                            pink: '#FFAAA5',    // Whiteboard pastel pink
+                            blue: '#A0C4FF'     // Whiteboard pastel blue
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'float-med': 'float 5s ease-in-out infinite',
+                        'float-fast': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(var(--tw-rotate, 0deg))' },
+                            '50%': { transform: 'translateY(-10px) rotate(var(--tw-rotate, 0deg))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FEFDF8;
+            color: #2D3748;
+            overflow-x: hidden;
+            /* Whiteboard dot grid effect */
+            background-image: radial-gradient(#CBD5E1 2px, transparent 2px);
+            background-size: 32px 32px;
+        }
+
+        /* Bubbly, bouncy whiteboard cards */
+        .bubbly-card {
+            background: #FFFFFF;
+            border: 3px solid #E2E8F0;
+            border-radius: 2.25rem;
+            box-shadow: 8px 8px 0px rgba(19, 94, 103, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .bubbly-card:hover {
+            transform: scale(1.02) translateY(-4px) rotate(0deg) !important;
+            box-shadow: 12px 12px 0px rgba(19, 94, 103, 0.14);
+            border-color: #6BBBAE;
+            z-index: 20;
+        }
+
+        /* Hand-drawn marker box inspired by the PDF whiteboard sketches */
+        .sketch-box {
+            position: relative;
+            border: 3px solid #2D3748;
+            border-radius: 0.75rem 1.25rem 0.85rem 1.15rem / 1.1rem 0.85rem 1.2rem 0.9rem;
+            background: #FFFFFF;
+            box-shadow: 5px 5px 0px rgba(45, 55, 72, 0.1);
+        }
+        .sketch-box::after {
+            content: '';
+            position: absolute;
+            left: 4%;
+            right: 4%;
+            bottom: -10px;
+            height: 6px;
+            border-top: 2.5px solid #2D3748;
+            border-bottom: 2.5px solid #2D3748;
+            transform: rotate(-0.8deg);
+        }
+
+        /* Marker highlight effect for headings */
+        .marker-highlight {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        .marker-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: -2%;
+            width: 104%;
+            height: 38%;
+            background: rgba(168, 230, 207, 0.75);
+            z-index: -1;
+            transform: rotate(-1.2deg);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body id="top" class="antialiased font-sans relative selection:bg-brand-mint selection:text-brand-text">
+
+    <!-- Navigation -->
+    <nav aria-label="Primary Navigation" class="fixed w-full z-50 bg-[#FEFDF8]/95 backdrop-blur-md border-b-[3px] border-brand-seafoam/40 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+            <a href="#top" class="flex items-center gap-3 group focus:outline-none">
+                <img src="images/logo-mark.png" alt="Disco Et Emergo Bird Flock Mark" class="w-12 h-9 object-contain group-hover:scale-110 transition-transform">
+                <span class="text-2xl md:text-3xl font-marker font-bold tracking-tight text-brand-marine transform -rotate-1 group-hover:rotate-0 transition-all">Disco Et Emergo</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-2xl font-hand font-bold text-brand-text">
+                <a href="#problem" class="hover:text-brand-teal hover:scale-105 transition-transform">The Impact</a>
+                <a href="#principles" class="hover:text-brand-teal hover:scale-105 transition-transform">Four Principles</a>
+                <a href="#facilitators" class="hover:text-brand-teal hover:scale-105 transition-transform">Facilitators</a>
+                <a href="#contact" class="bg-brand-marine text-white px-7 py-2.5 rounded-[2rem] font-sans font-bold text-base hover:bg-brand-teal transition-all border-2 border-transparent shadow-[4px_4px_0px_rgba(19,94,103,0.2)] hover:shadow-[6px_6px_0px_rgba(19,94,103,0.25)] hover:-translate-y-0.5 transform">
+                    Get Started
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation menu" class="md:hidden p-2.5 rounded-2xl border-2 border-brand-marine/20 text-brand-marine hover:bg-brand-mint/30 transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FEFDF8] border-b-[3px] border-brand-seafoam/40 px-6 pt-2 pb-6 space-y-3 text-2xl font-hand font-bold text-brand-text">
+            <a href="#problem" class="block py-2 hover:text-brand-teal">The Impact</a>
+            <a href="#principles" class="block py-2 hover:text-brand-teal">Four Principles</a>
+            <a href="#facilitators" class="block py-2 hover:text-brand-teal">Facilitators</a>
+            <a href="#contact" class="inline-block mt-2 bg-brand-marine text-white px-7 py-3 rounded-[2rem] font-sans font-bold text-base shadow-[4px_4px_0px_rgba(19,94,103,0.2)]">
+                Get Started
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 min-h-[92vh] flex flex-col justify-center items-center text-center relative overflow-hidden">
+        <!-- Fun floating whiteboard blobs -->
+        <div class="absolute top-32 left-[8%] w-44 h-44 bg-brand-mint/40 rounded-full blur-2xl animate-float-slow"></div>
+        <div class="absolute bottom-20 right-[8%] w-56 h-56 bg-brand-peach/40 rounded-full blur-2xl animate-float-med"></div>
+        <div class="absolute top-1/2 right-[18%] w-36 h-36 bg-brand-seafoam/25 rounded-full blur-2xl animate-float-fast"></div>
+
+        <!-- Clean Transparent Brand Logo (includes DISCO ET EMERGO & LEARN • COLLABORATE • EMERGE) -->
+        <div class="mb-8 w-full max-w-md md:max-w-lg mx-auto relative z-10 animate-float-slow">
+            <img src="images/logo-transparent.png" alt="Disco Et Emergo — Learn, Collaborate, Emerge" class="w-full h-auto object-contain drop-shadow-md">
+        </div>
+
+        <!-- Main Hook from Slide 3 of PDF -->
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-marker font-bold text-brand-text mb-6 transform -rotate-1 relative z-10 max-w-4xl leading-tight">
+            Host productive meetings <span class="marker-highlight text-brand-marine">(that don’t suck)!</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-brand-text/85 font-semibold max-w-3xl mb-10 leading-relaxed relative z-10">
+            Interactive adult learning &amp; team coaching that turns draining calendar obligations into <span class="font-marker text-brand-teal text-2xl md:text-3xl">curated, collaborative experiences</span> where people actually want to show up.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 relative z-10">
+            <a href="#contact" class="px-10 py-4 bg-brand-teal rounded-[2rem] text-white font-bold text-xl hover:bg-brand-marine transition-all shadow-[6px_6px_0px_rgba(19,94,103,0.2)] hover:shadow-[2px_2px_0px_rgba(19,94,103,0.2)] hover:translate-y-1 transform">
+                Book a Coaching Session
+            </a>
+            <a href="#principles" class="px-10 py-4 bg-white rounded-[2rem] text-brand-text font-bold text-xl hover:bg-brand-mint/40 transition-all border-[3px] border-brand-marine/20 shadow-[6px_6px_0px_rgba(45,55,72,0.1)] hover:shadow-[2px_2px_0px_rgba(45,55,72,0.1)] hover:translate-y-1 transform">
+                Explore the Principles
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- The Impact of Meetings Section (Statistics from Slide 2) -->
+        <section id="problem" class="py-24 px-6 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 max-w-4xl mx-auto">
+                    <h2 class="text-5xl md:text-6xl font-marker font-bold mb-6 text-brand-text transform rotate-1">
+                        <span class="marker-highlight">The Impact of Meetings</span>
+                    </h2>
+                    <p class="text-brand-text/85 text-2xl md:text-3xl font-hand leading-relaxed">
+                        Meetings are costly but necessary—often called <strong class="text-brand-teal text-3xl md:text-4xl font-marker inline-block transform -rotate-1">“the broccoli of work.” 🥦</strong><br>
+                        When they lack intention, they drain energy. When curated well, they unlock collective brilliance!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Stat 1: 28% -->
+                    <div class="bubbly-card p-10 text-center flex flex-col justify-center h-full bg-brand-peach/20 transform -rotate-1 animate-float-med">
+                        <div class="w-20 h-20 mx-auto bg-white rounded-[1.5rem] flex items-center justify-center mb-6 text-brand-marine shadow-[4px_4px_0px_rgba(0,0,0,0.05)] border-2 border-brand-marine/20 transform -rotate-3">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <div class="text-6xl md:text-7xl font-marker font-bold text-brand-marine mb-2">28<span class="text-5xl font-sans">%</span></div>
+                        <p class="text-brand-text font-bold mb-3 text-3xl font-hand">Of a Work Week</p>
+                        <p class="text-brand-text/80 text-lg font-semibold">Over a quarter of the average work week is spent in meetings—taking time away from deep, focused work.</p>
+                    </div>
+
+                    <!-- Stat 2: 392 hours -->
+                    <div class="bubbly-card p-10 text-center flex flex-col justify-center h-full bg-brand-mint/25 transform rotate-1 animate-float-slow">
+                        <div class="w-20 h-20 mx-auto bg-white rounded-[1.5rem] flex items-center justify-center mb-6 text-brand-teal shadow-[4px_4px_0px_rgba(0,0,0,0.05)] border-2 border-brand-teal/20 transform rotate-3">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div class="text-6xl md:text-7xl font-marker font-bold text-brand-marine mb-2">392 <span class="text-3xl text-brand-text/60 font-sans font-bold">hrs</span></div>
+                        <p class="text-brand-text font-bold mb-3 text-3xl font-hand">Hours Per Year</p>
+                        <p class="text-brand-text/80 text-lg font-semibold">Nearly 10 full standard workweeks per employee spent inside virtual or physical conference rooms every year.</p>
+                    </div>
+
+                    <!-- Stat 3: 11 million -->
+                    <div class="bubbly-card p-10 text-center flex flex-col justify-center h-full bg-brand-blue/20 transform -rotate-1 animate-float-fast">
+                        <div class="w-20 h-20 mx-auto bg-white rounded-[1.5rem] flex items-center justify-center mb-6 text-brand-marine shadow-[4px_4px_0px_rgba(0,0,0,0.05)] border-2 border-brand-marine/20 transform rotate-6">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div class="text-6xl md:text-7xl font-marker font-bold text-brand-marine mb-2">11M+</div>
+                        <p class="text-brand-text font-bold mb-3 text-3xl font-hand">Meetings Every Day</p>
+                        <p class="text-brand-text/80 text-lg font-semibold">Happening every single day. Imagine the creative momentum when those hours actually energize your team!</p>
+                    </div>
+                </div>
+
+                <!-- Source Citations from Slide 2 -->
+                <p class="mt-10 text-center text-sm text-brand-text/60 font-semibold">
+                    Sources:
+                    <a href="https://speakwiseapp.com/blog/time-spent-in-meetings-statistics" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand-teal">SpeakWise Meeting Statistics</a>
+                    &bull;
+                    <a href="https://www.nber.org/papers/w35706" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand-teal">National Bureau of Economic Research (NBER Working Paper w35706)</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- The Four Principles Section (Teaser Level with Whiteboard Sketch Styling) -->
+        <section id="principles" class="py-24 px-6 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 text-center md:text-left md:flex justify-between items-end gap-8">
+                    <div class="max-w-3xl">
+                        <h2 class="text-5xl md:text-6xl font-marker font-bold mb-4 text-brand-text transform -rotate-1">
+                            <span class="marker-highlight">The Four Principles</span>
+                        </h2>
+                        <p class="text-brand-text/85 text-2xl md:text-3xl font-hand">
+                            A sneak peek at the whiteboard framework we practice together in our live coaching sessions! ✨
+                        </p>
+                    </div>
+                    <div class="mt-6 md:mt-0 shrink-0">
+                        <a href="#contact" class="inline-flex items-center gap-2 text-xl font-marker text-brand-teal hover:text-brand-marine underline decoration-wavy decoration-brand-seafoam">
+                            Want the full hands-on workshop? Let’s talk →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    <!-- Principle #1 -->
+                    <article class="bubbly-card p-8 md:p-10 relative overflow-hidden group bg-white">
+                        <div class="flex items-start gap-4 mb-8">
+                            <span class="text-4xl md:text-5xl font-marker font-bold text-brand-teal shrink-0 pt-2 border-b-4 border-brand-teal leading-none">#1</span>
+                            <div class="sketch-box px-5 py-4 w-full transform -rotate-1">
+                                <h3 class="text-2xl md:text-3xl font-marker font-bold text-brand-text uppercase tracking-wide">
+                                    The best meetings are curated experiences.
+                                </h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-brand-text text-xl md:text-2xl font-hand font-bold pl-2">
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Shape the tone &amp; vibe.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Never waste anyone’s time.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Bring your personality to the table.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Prioritize engagement.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- Principle #2 -->
+                    <article class="bubbly-card p-8 md:p-10 relative overflow-hidden group bg-white">
+                        <div class="flex items-start gap-4 mb-8">
+                            <span class="text-4xl md:text-5xl font-marker font-bold text-brand-marine shrink-0 pt-2 border-b-4 border-brand-marine leading-none">#2</span>
+                            <div class="sketch-box px-5 py-4 w-full transform rotate-1">
+                                <h3 class="text-2xl md:text-3xl font-marker font-bold text-brand-text uppercase tracking-wide">
+                                    A meeting is NOT a prison.
+                                </h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-brand-text text-xl md:text-2xl font-hand font-bold pl-2">
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-marine font-marker shrink-0">→</span>
+                                <span>Understand that people have a choice!</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-marine font-marker shrink-0">→</span>
+                                <span>Center attendees.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-marine font-marker shrink-0">→</span>
+                                <span>Know why it’s important to meet in the first place.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- Principle #3 -->
+                    <article class="bubbly-card p-8 md:p-10 relative overflow-hidden group bg-white">
+                        <div class="flex items-start gap-4 mb-8">
+                            <span class="text-4xl md:text-5xl font-marker font-bold text-[#E06D53] shrink-0 pt-2 border-b-4 border-[#E06D53] leading-none">#3</span>
+                            <div class="sketch-box px-5 py-4 w-full transform -rotate-1">
+                                <h3 class="text-2xl md:text-3xl font-marker font-bold text-brand-text uppercase tracking-wide">
+                                    The vibe has gravity.
+                                </h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-brand-text text-xl md:text-2xl font-hand font-bold pl-2">
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#E06D53] font-marker shrink-0">→</span>
+                                <span>Be Authentic.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#E06D53] font-marker shrink-0">→</span>
+                                <span>Be Aware.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#E06D53] font-marker shrink-0">→</span>
+                                <span>Be Engaging.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#E06D53] font-marker shrink-0">→</span>
+                                <span>Be Respectful.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- Principle #4 -->
+                    <article class="bubbly-card p-8 md:p-10 relative overflow-hidden group bg-white">
+                        <div class="flex items-start gap-4 mb-8">
+                            <span class="text-4xl md:text-5xl font-marker font-bold text-brand-teal shrink-0 pt-2 border-b-4 border-brand-teal leading-none">#4</span>
+                            <div class="sketch-box px-5 py-4 w-full transform rotate-1">
+                                <h3 class="text-2xl md:text-3xl font-marker font-bold text-brand-text uppercase tracking-wide">
+                                    Growth is a superpower.
+                                </h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-brand-text text-xl md:text-2xl font-hand font-bold pl-2">
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Have a Beginner’s Mindset.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Always pause to reflect.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Measure the experience against your intention.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-brand-teal font-marker shrink-0">→</span>
+                                <span>Give yourself grace.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Facilitators Section (Slide 1) -->
+        <section id="facilitators" class="py-24 px-6 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 max-w-3xl mx-auto">
+                    <h2 class="text-5xl md:text-6xl font-marker font-bold mb-6 text-brand-text transform rotate-1">
+                        <span class="marker-highlight">Meet Your Facilitators</span>
+                    </h2>
+                    <p class="text-brand-text/85 text-2xl md:text-3xl font-hand">
+                        Guiding adult learners and teams to rethink how they gather, collaborate, and emerge stronger.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Facilitator 1: Jared Karol -->
+                    <div class="bubbly-card p-8 md:p-10 bg-white flex flex-col sm:flex-row items-center sm:items-start gap-7 transform -rotate-1">
+                        <!-- Placeholder Avatar Frame (Swap svg with <img src="images/jared.jpg" ...> when ready) -->
+                        <div class="w-32 h-32 rounded-3xl bg-brand-mint/35 border-[3px] border-brand-marine/30 flex items-center justify-center shrink-0 shadow-[4px_4px_0px_rgba(19,94,103,0.12)] transform -rotate-2">
+                            <svg class="w-16 h-16 text-brand-marine" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-mint/50 text-brand-marine font-bold text-xs uppercase tracking-wider mb-2">Co-Facilitator &amp; Coach</span>
+                            <h3 class="text-3xl font-marker font-bold text-brand-marine mb-2">Jared Karol</h3>
+                            <p class="text-brand-text/80 text-base md:text-lg font-semibold leading-relaxed">
+                                Facilitator, speaker, and adult-learning practitioner passionate about turning everyday workplace conversations into spaces of genuine connection, clarity, and shared momentum.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Facilitator 2: Mercedes Adams -->
+                    <div class="bubbly-card p-8 md:p-10 bg-white flex flex-col sm:flex-row items-center sm:items-start gap-7 transform rotate-1">
+                        <!-- Placeholder Avatar Frame (Swap svg with <img src="images/mercedes.jpg" ...> when ready) -->
+                        <div class="w-32 h-32 rounded-3xl bg-brand-peach/45 border-[3px] border-brand-marine/30 flex items-center justify-center shrink-0 shadow-[4px_4px_0px_rgba(19,94,103,0.12)] transform rotate-2">
+                            <svg class="w-16 h-16 text-brand-marine" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-peach/60 text-brand-marine font-bold text-xs uppercase tracking-wider mb-2">Co-Facilitator &amp; Coach</span>
+                            <h3 class="text-3xl font-marker font-bold text-brand-marine mb-2">Mercedes Adams</h3>
+                            <p class="text-brand-text/80 text-base md:text-lg font-semibold leading-relaxed">
+                                Collaborative leadership coach and educator dedicated to designing human-centered learning experiences where every attendee feels valued, energized, and heard.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Workshop Inquiry Section (Slide 25 Mantra + Plug-and-Play Form) -->
+        <section id="contact" class="py-24 px-6 bg-brand-seafoam/10 border-t-[3px] border-brand-marine/15 relative overflow-hidden">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="text-center mb-12">
+                    <p class="text-3xl md:text-4xl font-hand font-bold text-brand-teal mb-3 transform -rotate-1">
+                        Learn, practice, grow — emerge!
+                    </p>
+                    <h2 class="text-4xl md:text-6xl font-marker font-bold mb-4 text-brand-marine">
+                        Bring Disco Et Emergo to Your Team 🚀
+                    </h2>
+                    <p class="text-xl text-brand-text/80 font-semibold max-w-2xl mx-auto">
+                        Curious about our upcoming coaching sessions or want to book a tailored workshop for your organization? Drop a note on the whiteboard below!
+                    </p>
+                </div>
+
+                <div class="bubbly-card p-8 md:p-12 bg-white max-w-2xl mx-auto">
+                    <form id="contact-form" novalidate class="space-y-6">
+                        <!-- Honeypot field for bot spam protection -->
+                        <div class="hidden" aria-hidden="true">
+                            <label for="contact-botcheck">Do not fill this out if you are human</label>
+                            <input id="contact-botcheck" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="contact-name" class="block text-xl font-hand font-bold text-brand-text mb-1">Your Name *</label>
+                                <input id="contact-name" name="name" type="text" required placeholder="Alex Rivera"
+                                    class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-brand-teal focus:outline-none font-semibold text-brand-text bg-[#FEFDF8]">
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-xl font-hand font-bold text-brand-text mb-1">Work Email *</label>
+                                <input id="contact-email" name="email" type="email" required placeholder="alex@company.com"
+                                    class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-brand-teal focus:outline-none font-semibold text-brand-text bg-[#FEFDF8]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contact-org" class="block text-xl font-hand font-bold text-brand-text mb-1">Organization / Team Size <span class="text-brand-text/50 font-normal">(optional)</span></label>
+                            <input id="contact-org" name="organization" type="text" placeholder="e.g., Acme Corp — 25 managers"
+                                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-brand-teal focus:outline-none font-semibold text-brand-text bg-[#FEFDF8]">
+                        </div>
+
+                        <div>
+                            <label for="contact-message" class="block text-xl font-hand font-bold text-brand-text mb-1">How can we help your team? *</label>
+                            <textarea id="contact-message" name="message" rows="4" required placeholder="Tell us about your team's meeting culture and what you'd love to transform..."
+                                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-300 focus:border-brand-teal focus:outline-none font-semibold text-brand-text bg-[#FEFDF8]"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 px-8 bg-brand-marine text-white rounded-[2rem] font-bold text-xl hover:bg-brand-teal transition-all shadow-[6px_6px_0px_rgba(19,94,103,0.2)] hover:shadow-[2px_2px_0px_rgba(19,94,103,0.2)] hover:translate-y-0.5 transform">
+                            Send Inquiry
+                        </button>
+
+                        <!-- Accessible Status Banner -->
+                        <div id="contact-status" role="status" aria-live="polite" class="hidden p-5 rounded-2xl border-2 text-brand-text font-semibold">
+                            <p id="contact-status-text"></p>
+                            <div id="contact-fallback-actions" class="hidden mt-4 flex flex-wrap gap-3">
+                                <a id="contact-mailto-link" href="mailto:hello@discoetemergo.example.com" class="px-4 py-2 rounded-xl bg-brand-marine text-white text-sm font-bold hover:bg-brand-teal transition-colors">
+                                    Open in Email App
+                                </a>
+                                <button id="contact-copy-btn" type="button" class="px-4 py-2 rounded-xl bg-white border-2 border-brand-marine/30 text-brand-marine text-sm font-bold hover:bg-brand-mint/30 transition-colors">
+                                    Copy Inquiry Details
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Decorative background blobs -->
+            <div class="absolute top-10 right-[12%] w-36 h-36 bg-brand-pink/35 rounded-full blur-2xl animate-float-slow"></div>
+            <div class="absolute bottom-10 left-[12%] w-44 h-44 bg-brand-mint/40 rounded-full blur-2xl animate-float-med"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center bg-[#FEFDF8] border-t-2 border-slate-200">
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
+            <img src="images/logo-mark.png" alt="Disco Et Emergo Logo Mark" class="w-14 h-10 object-contain">
+            <div class="text-brand-marine font-marker text-2xl transform -rotate-1">
+                LEARN • COLLABORATE • EMERGE
+            </div>
+            <p class="text-brand-text/60 text-lg font-hand font-bold">
+                &copy; 2026 Disco Et Emergo. Facilitated by Jared Karol &amp; Mercedes Adams. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
