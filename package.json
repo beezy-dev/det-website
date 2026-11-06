@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "node --test tests/site.test.js",
-    "build": "node --check js/main.js && node --test tests/site.test.js"
+    "build": "node --check html/js/main.js && node --test tests/site.test.js"
   }
 }
 

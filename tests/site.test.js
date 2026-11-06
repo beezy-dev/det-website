@@ -8,9 +8,10 @@ const {
     buildMailtoUrl,
     formatClipboardSummary,
     submitContactForm
-} = require('../js/main.js');
+} = require('../html/js/main.js');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
+const HTML_DIR = path.join(ROOT_DIR, 'html');
 
 test('validateContactData accepts valid form input and rejects invalid fields', () => {
     const valid = validateContactData({
@@ -131,8 +132,8 @@ test('submitContactForm gracefully falls back to mailto if API fetch fails', asy
     assert.ok(res.mailtoUrl.startsWith('mailto:'));
 });
 
-test('index.html and logo assets exist and contain all required sections and PDF content', () => {
-    const htmlPath = path.join(ROOT_DIR, 'index.html');
+test('html/index.html and logo assets exist and contain all required sections and PDF content', () => {
+    const htmlPath = path.join(HTML_DIR, 'index.html');
     const html = fs.readFileSync(htmlPath, 'utf8');
 
     // Verify logo assets exist and broken reference is removed
@@ -141,8 +142,8 @@ test('index.html and logo assets exist and contain all required sections and PDF
     assert.ok(html.includes('images/logo-mark.png'), 'Navbar/footer should use logo mark');
 
     for (const file of ['images/logo.jpeg', 'images/logo-transparent.png', 'images/logo-mark.png']) {
-        const fullPath = path.join(ROOT_DIR, file);
-        assert.ok(fs.existsSync(fullPath), `Expected asset ${file} to exist`);
+        const fullPath = path.join(HTML_DIR, file);
+        assert.ok(fs.existsSync(fullPath), `Expected asset ${file} to exist in html/`);
         assert.ok(fs.statSync(fullPath).size > 1000, `Expected asset ${file} to be non-empty`);
     }
 
