@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   pages: write
+  deployments: write
   id-token: write
 
 # Allow one concurrent deployment, cancelling any older in-progress workflow run
@@ -46,6 +47,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Cancel stuck Pages deployment if present
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for id in 5d02b67fe98ed98866670ccdba1e47fe95fa492c 7601683017 7601569070 7601355068 7601347838; do
+            gh api --method POST "/repos/${{ github.repository }}/pages/deployments/${id}/cancel" 2>/dev/null || true
+          done
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
